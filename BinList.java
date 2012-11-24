@@ -13,24 +13,13 @@ public class BinList {
 		list.add(index, element);
 	}	
 	
-	public boolean contains(int element) { //Can this be simplified?
+	public boolean contains(int element) { 
 		if (isEmpty()) {
 			return false;
 		}
 		int lowerIndex = 0;
 		int upperIndex = list.size() - 1;
-		if (upperIndex > 0) {
-			return binarySearch(element, lowerIndex, upperIndex);
-		}
-		else if (upperIndex == 0) {
-			if (element == list.get(upperIndex)) {
-				System.out.println("The item was found at index: " + upperIndex);
-				return true;
-			}
-			return false;
-		}
-		System.out.println("Item not found.");
-		return false;		
+		return binarySearch(element, lowerIndex,upperIndex);
 	}	
 	
 	public boolean binarySearch(int element, int lowerIndex, int upperIndex) {
@@ -41,11 +30,7 @@ public class BinList {
 			}
 			return false;
 		}
-		if (lowerIndex > upperIndex) {// list.size() - 1) {
-			//if (element == list.get(lowerIndex)) {
-				//System.out.println("*The item was found at index: " + lowerIndex);
-			//	return true;
-			//}
+		if (lowerIndex > upperIndex) {
 			return false;
 		}
 		int midPoint = getMidIndex(lowerIndex, upperIndex);
@@ -104,7 +89,7 @@ public class BinList {
 				
 		print();
 		
-		boolean isContained = contains(1001);
+		boolean isContained = contains(0);
 		if (!isContained) {
 			System.out.println("Item not found.");
 		}
