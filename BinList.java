@@ -89,7 +89,9 @@ public class BinList {
 				
 		print();
 		
-		boolean isContained = contains(0);
+		System.out.print("Which number would you like to find? ");
+		int query = Integer.parseInt(System.console().readLine());
+		boolean isContained = contains(query);
 		if (!isContained) {
 			System.out.println("Item not found.");
 		}
