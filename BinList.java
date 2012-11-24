@@ -68,6 +68,12 @@ public class BinList {
 			System.out.println(array[i]);
 		}
 	}	
+	
+	public void printDirect() {
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+	}
 			
 		
 	public boolean isEmpty() {
@@ -85,9 +91,14 @@ public class BinList {
 		for (int i = 0; i < listSize; i++) {
 			int intToAdd = i + 1;
 			add(i, intToAdd);
+			/**
+			double doubleToAdd = Math.random() * 1000; //You must include a method to sort the list first!
+			int intToAdd = (int) doubleToAdd;
+			add(i, intToAdd);
+			*/			
 		}
 				
-		print();
+		printDirect();
 		
 		System.out.print("Which number would you like to find? ");
 		int query = Integer.parseInt(System.console().readLine());
