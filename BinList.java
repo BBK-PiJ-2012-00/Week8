@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BinList {
-	private ArrayList<Integer> list;
+	private List<Integer> list;
 	private Object[] array;
 		
 	public BinList() {
@@ -13,41 +13,65 @@ public class BinList {
 		list.add(index, element);
 	}	
 	
-	public boolean contains(int element) {
-		//array = convertToArray(list);
+	public boolean contains(int element) { //Can this be simplified?
 		if (isEmpty()) {
 			return false;
 		}
 		int lowerIndex = 0;
 		int upperIndex = list.size() - 1;
-		return binarySearch(element, lowerIndex, upperIndex);
-	}		
+		if (upperIndex > 0) {
+			return binarySearch(element, lowerIndex, upperIndex);
+		}
+		else if (upperIndex == 0) {
+			if (element == list.get(upperIndex)) {
+				System.out.println("The item was found at index: " + upperIndex);
+				return true;
+			}
+			return false;
+		}
+		System.out.println("Item not found.");
+		return false;		
+	}	
 	
-	//Need to sort issues with obtaining an int from an index from the ArrayList.
 	public boolean binarySearch(int element, int lowerIndex, int upperIndex) {
+		if (upperIndex == 0) {
+			if (element == list.get(upperIndex)) {
+				System.out.println("**The item was found at index: " + upperIndex);
+				return true;
+			}
+			return false;
+		}
+		if (lowerIndex > upperIndex) {// list.size() - 1) {
+			//if (element == list.get(lowerIndex)) {
+				//System.out.println("*The item was found at index: " + lowerIndex);
+			//	return true;
+			//}
+			return false;
+		}
 		int midPoint = getMidIndex(lowerIndex, upperIndex);
 		System.out.println("Searching index: " + midPoint);
+		System.out.println("Item contained in index: " + list.get(midPoint));
 		if (element == list.get(midPoint)) { //this is an object, not an int!! Auto-unwrapping.
 			System.out.println("The item was found at index: " + midPoint);
 			return true;
 		}
-		else if (element < list.get(midPoint)) {
+		if (element < list.get(midPoint)) {
 			upperIndex = midPoint - 1;
 			return binarySearch(element, lowerIndex, upperIndex);
 		}
-		else if (element > list.get(midPoint)) {
+		if (element > list.get(midPoint)) {
 			lowerIndex = midPoint + 1;
 			return binarySearch(element, lowerIndex, upperIndex);
 		}
 		return false;
 	}		
 	
-	public int getMidIndex(int lowerIndex, int upperIndex) {
-		int midPoint = (upperIndex - lowerIndex)/2;
+	public int getMidIndex(int lowerIndex, int upperIndex) {	
+		int midPoint = (upperIndex + lowerIndex)/2;
 		return midPoint;
 	}
 	
-	public Object[] convertToArray(ArrayList<Integer> list) {
+	public Object[] convertToArray(List<Integer> list) {
 		array = list.toArray();
 		return array;
 	}	
@@ -80,7 +104,10 @@ public class BinList {
 				
 		print();
 		
-		boolean isContained = contains(9);
+		boolean isContained = contains(1001);
+		if (!isContained) {
+			System.out.println("Item not found.");
+		}
 		
 	}
 	
